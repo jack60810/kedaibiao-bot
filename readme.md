@@ -28,8 +28,10 @@ python3 video_to_audio.py --channel-name=$channe_name
 ```
 
 4. use api to get transcript for videos without transcript
+    Using faster-whisper to transcript audios
+
 ```
-python3 audio_to_text.py --channel-name=$channe_name --limit=10
+OMP_NUM_THREADS=4 python3 audio_to_text.py --channel-name=$channe_name --limit=10
 ```
 
 5. install Anything LLM  
