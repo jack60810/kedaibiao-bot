@@ -29,6 +29,14 @@ python3 video_to_audio.py --channel-name=$channe_name
 
 4. use api to get transcript for videos without transcript
     Using faster-whisper to transcript audios
+    suggest by using cuda, the audio to text will faster
+    change the code in audio_to_text.py 
+    ```
+    model = WhisperModel(model_size, device="cuda", compute_type="float16")
+    ```
+    ```
+    model = WhisperModel(model_size, device="cpu", compute_type="int8")
+    ```
 
 ```
 OMP_NUM_THREADS=14 python3 audio_to_text.py --channel-name=$channe_name --limit=10
