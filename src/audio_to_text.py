@@ -68,9 +68,10 @@ def main(args):
 
                 # save transcript with encoding
                 with open(
-                    PathHelper.text_dir / f"{fname}.txt", "w", encoding="utf8"
+                    PathHelper.text_dir / f"{fname}.txt", "w"
                 ) as f:
-                    json.dump(transcript, f)
+                    f.write(transcript)
+                    
 
             # if it's selected channel, then add to entities_selected
             if channel_name:
@@ -96,7 +97,7 @@ def main(args):
     # audio to text
     # use faster whisper
     model_size = "large-v3"
-    model = WhisperModel(model_size, device="cpu", compute_type="float16")
+    model = WhisperModel(model_size, device="cpu", compute_type="int8")
     total_sec = 0
     for fname_ext in tqdm(fnames_selected):
         fname = fname_ext.split(".")[0]
@@ -155,7 +156,8 @@ def main(args):
 
         # save transcript
         with open(PathHelper.text_dir / f"{fname}.txt", "w") as f:
-            json.dump(transcript_processed, f)
+            f.write(transcript_processed)
+
 
 
 if __name__ == "__main__":
