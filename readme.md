@@ -1,4 +1,4 @@
-# ask-me-parenting-line-bot
+Ref: https://github.com/kstseng/ask-me-parenting-app (Most change on step 1, 2 and  4.)
 
 
 1. get video entites
