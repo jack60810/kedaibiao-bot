@@ -63,6 +63,13 @@ mintplexlabs/anythingllm
 
 6. Chosse your llm and ref data as Rag
 7. Some exapmle 
+
+The question is I'm a data scientist and I have questions about my career
+
+Result in following screenshot and here is the youtube video which the bot reference. 
+
+https://www.youtube.com/watch?v=11B89hfa-xY
+
 ![image](https://github.com/user-attachments/assets/b9020e25-648f-4dbb-8ed8-0cd25bcbc1c1)
 
 
