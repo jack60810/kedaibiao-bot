@@ -33,7 +33,9 @@ python3 video_to_audio.py --channel-name=$channe_name
 ```
 OMP_NUM_THREADS=4 python3 audio_to_text.py --channel-name=$channe_name --limit=10
 ```
-
+```
+python3 audio_to_text.py --channel-name=$channe_name --limit=10
+```
 5. install Anything LLM  
 suggest by using Docker
 https://github.com/Mintplex-Labs/anything-llm/blob/master/docker/HOW_TO_USE_DOCKER.md
