@@ -12,7 +12,7 @@ try:
     from utils import PathHelper, get_logger
 except Exception as e:
     print(e)
-    raise ("Please run this script from the root directory of the project")
+    #raise ("Please run this script from the root directory of the project")
 
 # load env variables
 dotenv_path = PathHelper.root_dir / ".env"
@@ -20,7 +20,8 @@ load_dotenv(dotenv_path=dotenv_path)
 
 # logger
 logger = get_logger(__name__)
-
+os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
+#os.environ["OMP_NUM_THREADS"]="14"
 
 def main(args):
     channel_name = args.channel_name
@@ -68,7 +69,7 @@ def main(args):
 
                 # save transcript with encoding
                 with open(
-                    PathHelper.text_dir / f"{fname}.txt", "w"
+                    PathHelper.text_dir / f"{fname}.txt", "w",encoding = 'utf-8'
                 ) as f:
                     f.write(transcript)
                     
@@ -97,7 +98,7 @@ def main(args):
     # audio to text
     # use faster whisper
     model_size = "large-v3"
-    model = WhisperModel(model_size, device="cpu", compute_type="int8")
+    model = WhisperModel(model_size, device="cuda", compute_type="float16")
     total_sec = 0
     for fname_ext in tqdm(fnames_selected):
         fname = fname_ext.split(".")[0]
@@ -155,7 +156,7 @@ def main(args):
         transcript_processed = ",".join(transcription_segments)
 
         # save transcript
-        with open(PathHelper.text_dir / f"{fname}.txt", "w") as f:
+        with open(PathHelper.text_dir / f"{fname}.txt", "w",encoding = 'utf-8') as f:
             f.write(transcript_processed)
 
 
