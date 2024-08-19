@@ -62,4 +62,7 @@ mintplexlabs/anythingllm
 ```
 
 6. Chosse your llm and ref data as Rag
+7. Some exapmle 
+![image](https://github.com/user-attachments/assets/b9020e25-648f-4dbb-8ed8-0cd25bcbc1c1)
+
 
