@@ -96,7 +96,7 @@ def main(args):
     # audio to text
     # use faster whisper
     model_size = "large-v3"
-    model = WhisperModel(model_size, device="cpu", compute_type="int8")
+    model = WhisperModel(model_size, device="cpu", compute_type="float16")
     total_sec = 0
     for fname_ext in tqdm(fnames_selected):
         fname = fname_ext.split(".")[0]
@@ -138,7 +138,7 @@ def main(args):
         segments, info = model.transcribe(
             str(PathHelper.audio_dir / fname_ext),
             beam_size=5,
-            initial_prompt="以下是普通話的句子。",
+            initial_prompt="以下是普通話的句子",
         )
         logger.info(
             "Detected language '%s' with probability %f"
@@ -149,21 +149,9 @@ def main(args):
             with open(PathHelper.text_dir / f"{fname}.txt", "w") as f:
                 json.dump("", f)
             continue
-
-        for segment in segments:
-            # print("[%.2fs -> %.2fs] %s" % (segment.start, segment.end, segment.text))
-            seg_i.append([segment.start, segment.end, segment.text])
-
-        # merge transcripts
-        transcript_text = [
-            [s[2] for s in seg_i[i : i + 10]] for i in range(0, len(seg_i), 10)
-        ]
-        transcript_text_restore = []
-        for transcript_text_i in transcript_text:
-            result_punct = punct_model.restore_punctuation(" ".join(transcript_text_i))
-            transcript_text_restore.append(result_punct)
-
-        transcript_processed = "".join(transcript_text_restore)
+        
+        transcription_segments = [segment.text for segment in segments]
+        transcript_processed = ",".join(transcription_segments)
 
         # save transcript
         with open(PathHelper.text_dir / f"{fname}.txt", "w") as f:
